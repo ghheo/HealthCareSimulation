@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WaitingArea : MonoBehaviour {
 
-	ArrayList waitingArea;
+	public ArrayList waitingArea;
 
 	void Start () {
 		waitingArea = new ArrayList();
@@ -12,7 +12,11 @@ public class WaitingArea : MonoBehaviour {
 	void Update () {
 	
 	}
-	public void InsertPatientIntoRegistration(Patient pat){
+	public void InsertPatientIntoWaiting(Patient pat){
 		waitingArea.Add (pat);
+	}
+
+	public int PatientInWaitingArea(){
+		return waitingArea.Count;
 	}
 }

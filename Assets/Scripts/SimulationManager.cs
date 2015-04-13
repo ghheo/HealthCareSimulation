@@ -6,15 +6,16 @@ public class SimulationManager : MonoBehaviour {
 
 	float timer = 0; // this is countdown time  for time elapsed since startup use Time.realtimeSinceStartup
 
-	ArrayList waitingPatients,registrationLine;
-	Queue triagePatients,treatMentPatients;
+	WaitingArea waitingArea;
+	RegistrationLine registration;
+
 	RandomClass random;
 	Patient patient;
 
 	void Start(){
 		gameObject.AddComponent<RandomClass>(); // if we dont add this to object then we get null pointer error.
 		random = gameObject.GetComponent<RandomClass>();		
-		waitingPatients = new ArrayList();
+		registration = gameObject.AddComponent<RegistrationLine>();
 	}
 
 	void Update () {
@@ -23,20 +24,20 @@ public class SimulationManager : MonoBehaviour {
 
 		if(timer >= 1){ // every N second create patient and add patient to waiting list
 			patient = new Patient(RandomPatientType(),Time.realtimeSinceStartup);
-			
-			print("patient in waiting area: "+waitingPatients.Count);
+			registration.InsertPatientIntoRegistration(patient);
+			print("patient in registration area: "+registration.PatientInLine());
 			timer = 0; 
 		}
 
-		// search through patientWaitinglist and find which patient been waiting for 10 secs. and remove them
+		// search through patientRegistration and find which patient been waiting for 10 secs. and remove them
 		// but If condition not properly working here. patient does get remove after 10 secs thou.
-		for (int index = waitingPatients.Count - 1; index >= 0; index--)
+		for (int index = registration.PatientInLine() - 1; index >= 0; index--)
 		{
-			Patient pat = (Patient)waitingPatients[index];
-			if (pat.patientType.Contains(PatientType.Reneging.ToString()) && pat.waitingFor >= 10.0f)
+			Patient pat = (Patient)registration.registrationLine[index];
+			if (pat.patientType.Contains(PatientType.Reneging.ToString()) && pat.waitingFor >= 5.0f)
 			{
-				print(pat.patientType + " patient leaving");
-				waitingPatients.RemoveAt(index); // remove patient at index where paiting is waiting for 10 secs
+				print(pat.patientType + " type patient reneging");
+				registration.registrationLine.RemoveAt(index); // remove patient at index where paiting is waiting for 10 secs
 			}
 		}
 	}
