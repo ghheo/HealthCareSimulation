@@ -7,10 +7,6 @@ public class RandomClass : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		val = getRandomTime(10.0f, 25.0f);
-		Debug.Log(val);
-		test = willRenege();
-		Debug.Log (test);
 	}
 	
 	// Update is called once per frame
@@ -18,20 +14,20 @@ public class RandomClass : MonoBehaviour {
 	
 	}
 
-	//Get Random time after finding the average 1000 times
-	public float getRandomTime(float min, float max)
+	//Get Random time after finding the average 100 times
+	public float getRandomTime(float min, float max, int times)
 	{
 		float sum = 0.0f;
 		float average = 0.0f;
 		float val;
 
-		for(int i = 0; i < 100; i++)
+		for(int i = 0; i < times; i++)
 		{
 			val = Random.Range(min, max);
 			sum = sum + val;
 		}
 
-		average = sum / 100;
+		average = sum / times;
 
 		return average;
 	}
