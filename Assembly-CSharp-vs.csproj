@@ -52,7 +52,11 @@
      <Compile Include="Assets\PolyNav2D\Scripts\Runtime\PolyNavObstacle.cs" />
      <Compile Include="Assets\Scripts\Patient.cs" />
      <Compile Include="Assets\Scripts\RandomClass.cs" />
+     <Compile Include="Assets\Scripts\RegistrationLine.cs" />
      <Compile Include="Assets\Scripts\SimulationManager.cs" />
+     <Compile Include="Assets\Scripts\TreatMentArea.cs" />
+     <Compile Include="Assets\Scripts\TriageQueue.cs" />
+     <Compile Include="Assets\Scripts\WaitingArea.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>

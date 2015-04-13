@@ -21,27 +21,26 @@ public class SimulationManager : MonoBehaviour {
 		timer += Time.deltaTime; // basic countdown which will get reset after limited time
 		float rTime = random.getRandomTime(2.0f,4.0f,100);
 
-		if(timer >= rTime){ // every N second create patient and add patient to waiting list
+		if(timer >= 1){ // every N second create patient and add patient to waiting list
 			patient = new Patient(RandomPatientType(),Time.realtimeSinceStartup);
-			waitingPatients.Add(patient);
-			print(waitingPatients.Count);
+			
+			print("patient in waiting area: "+waitingPatients.Count);
 			timer = 0; 
-			print("Now patient counts "+waitingPatients.Count);
 		}
 
 		// search through patientWaitinglist and find which patient been waiting for 10 secs. and remove them
 		// but If condition not properly working here. patient does get remove after 10 secs thou.
-
 		for (int index = waitingPatients.Count - 1; index >= 0; index--)
 		{
-			Patient entry = (Patient)waitingPatients[index];
-			if (entry.waitingFor >= 10.0f)
+			Patient pat = (Patient)waitingPatients[index];
+			if (pat.patientType.Contains(PatientType.Reneging.ToString()) && pat.waitingFor >= 10.0f)
 			{
-				print(entry + "patient leaving");
+				print(pat.patientType + " patient leaving");
 				waitingPatients.RemoveAt(index); // remove patient at index where paiting is waiting for 10 secs
 			}
 		}
 	}
+
 
 	//Generate random patient type based on 3 patient type reneging,normal,emergency(ambulance)
 	public PatientType RandomPatientType(){

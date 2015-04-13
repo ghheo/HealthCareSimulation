@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class RandomClass : MonoBehaviour {
-	float val = 0.0f;
-	bool test;
 
 	// Use this for initialization
 	void Start () {
