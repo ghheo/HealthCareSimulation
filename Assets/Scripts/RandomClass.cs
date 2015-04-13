@@ -13,7 +13,7 @@ public class RandomClass : MonoBehaviour {
 	}
 
 	//Get Random time after finding the average 100 times
-	public float getRandomTime(float min, float max, int times)
+	public static float getRandomTime(float min, float max, int times)
 	{
 		float sum = 0.0f;
 		float average = 0.0f;
@@ -31,7 +31,7 @@ public class RandomClass : MonoBehaviour {
 	}
 
 	//
-	public bool willRenege(){
+	public static bool willRenege(){
 		bool renege = false;
 
 		float percentChance = Random.Range(0.0f, 100.0f);

@@ -19,7 +19,7 @@ public class SimulationManager : MonoBehaviour {
 
 	void Update () {
 		timer += Time.deltaTime; // basic countdown which will get reset after limited time
-		float rTime = random.getRandomTime(2.0f,4.0f,100); // this is random average time coming from randomClass
+		float rTime = RandomClass.getRandomTime(2.0f,4.0f,100); // this is random average time coming from randomClass
 
 		if(timer >= 1){ 
 			patient = new Patient(RandomPatientType(),Time.realtimeSinceStartup);
@@ -29,11 +29,13 @@ public class SimulationManager : MonoBehaviour {
 			timer = 0; 
 		}
 
+
+
 		// search through patientRegistration and find which patient been waiting for 10 secs. and remove them(renege) 
 		for (int index = registration.PatientInLine() - 1; index >= 0; index--)
 		{
 			Patient pat = (Patient)registration.registrationLine[index];
-			if (pat.patientType.Contains(PatientType.Reneging.ToString()) && pat.waitingFor >= 5.0f)
+			if (pat.willRenege == true && pat.waitingFor >= 5.0f)
 			{
 				print(pat.patientType + " type patient reneging");
 				registration.registrationLine.RemoveAt(index); 
@@ -43,9 +45,9 @@ public class SimulationManager : MonoBehaviour {
 
 	//Generate random patient type based on 3 patient type reneging,normal,emergency(ambulance)
 	public PatientType RandomPatientType(){
-		if(random.willRenege()){
-			return PatientType.Reneging;
-		}
+        //if(RandomClass.willRenege()){
+        //    return PatientType.Reneging;
+        //}
 		return (PatientType)(UnityEngine.Random.Range(1, PatientType.GetNames(typeof(PatientType)).Length));
 	}
 }
